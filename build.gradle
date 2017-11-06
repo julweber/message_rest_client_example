@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+  mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+  compile "org.apache.httpcomponents:httpclient:4.1.1"
+  compile "com.googlecode.json-simple:json-simple:1.1.1"
+}
+
+jar {
+  baseName = 'message_rest_client_example'
+  version =  '0.1.0'
+}
+
+sourceSets.main.java.srcDirs = ['src']
+mainClassName = "training.MessageClient"
