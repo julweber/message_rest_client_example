@@ -21,4 +21,4 @@ jar {
 }
 
 sourceSets.main.java.srcDirs = ['src']
-mainClassName = "training.MessageClient"
+mainClassName = "training.Application"

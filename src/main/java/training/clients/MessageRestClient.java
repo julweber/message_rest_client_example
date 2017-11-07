@@ -1,4 +1,4 @@
-package training;
+package training.clients;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,11 +13,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.entity.StringEntity;
 import org.json.simple.JSONObject;
 
-public class MessageClient {
+public class MessageRestClient {
   private final String baseUrl = "http://localhost:8081/v1/messages";
   private DefaultHttpClient client;
 
-  public MessageClient() {
+  public MessageRestClient() {
     this.client = new DefaultHttpClient();
   }
 
@@ -60,16 +60,5 @@ public class MessageClient {
     while ((line = rd.readLine()) != null) {
      System.out.println(line);
     }
-  }
-
-  public static void main(String[] args) throws ClientProtocolException, IOException {
-    MessageClient client = new MessageClient();
-    System.out.println("Executing requests ...");
-    System.out.println("\n");
-    client.postMessage("godzilla@japan.com", "Wake Up", "Have a look at our precious radiation!");
-    System.out.println("\n");
-    client.getMessages();
-    System.out.println("\n");
-    client.getMessage(1);
   }
 }
