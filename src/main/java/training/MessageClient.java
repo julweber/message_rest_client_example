@@ -32,13 +32,13 @@ public class MessageClient {
     }
   }
 
-  public void postMessage() throws ClientProtocolException, IOException {
+  public void postMessage(String recipient, String header, String body) throws ClientProtocolException, IOException {
     System.out.println(String.format("Executing POST to endpoint: %s", baseUrl));
     HttpPost post = new HttpPost(baseUrl);
     JSONObject json = new JSONObject();
-    json.put("recipient", "godzilla@japan.com");
-    json.put("header", "Wake Up");
-    json.put("body", "Have a look at our precious radiation!");
+    json.put("recipient", recipient);
+    json.put("header", header);
+    json.put("body", body);
     StringEntity se = new StringEntity( json.toString());
     se.setContentType("application/json");
     post.setEntity(se);
@@ -50,8 +50,8 @@ public class MessageClient {
     }
   }
 
-  public void getMessage() throws ClientProtocolException, IOException {
-    String endpoint = baseUrl + "/1";
+  public void getMessage(Integer messageId) throws ClientProtocolException, IOException {
+    String endpoint = baseUrl + String.format("/%d", messageId);
     System.out.println(String.format("Executing GET to endpoint: %s", endpoint));
     HttpGet request = new HttpGet(endpoint);
     HttpResponse response = client.execute(request);
@@ -66,10 +66,10 @@ public class MessageClient {
     MessageClient client = new MessageClient();
     System.out.println("Executing requests ...");
     System.out.println("\n");
-    client.postMessage();
+    client.postMessage("godzilla@japan.com", "Wake Up", "Have a look at our precious radiation!");
     System.out.println("\n");
     client.getMessages();
     System.out.println("\n");
-    client.getMessage();
+    client.getMessage(1);
   }
 }
